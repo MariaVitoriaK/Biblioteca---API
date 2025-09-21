@@ -36,7 +36,7 @@ export class BookController {
   }
 
   static async update(req: Request, res: Response) {
-    const id = req.params.id;
+    const id = Number(req.params.id);
     const { title, authorId, genreId } = req.body;
 
     const book = await repo().findOneBy({ id });
@@ -56,7 +56,7 @@ export class BookController {
   }
 
   static async delete(req: Request, res: Response) {
-    const id = req.params.id;
+    const id = Number(req.params.id);
     const book = await repo().findOneBy({ id });
     if (!book) return res.status(404).send("Book not found");
 
@@ -70,7 +70,7 @@ export class BookController {
   }
 
   static async getById(req: Request, res: Response) {
-    const id = req.params.id;
+    const id = Number(req.params.id);
     const book = await repo().findOne({ where: { id }, relations: ["author", "genre"] });
     if (!book) return res.status(404).send("Book not found");
 

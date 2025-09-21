@@ -1,12 +1,12 @@
 // src/Entities/User.ts
-import { Entity, PrimaryColumn, Column, OneToMany } from "typeorm";
+import { Entity, PrimaryColumn, Column, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { v4 as uuidv4 } from "uuid";
 import { Reservation } from "./Reservation";
 
 @Entity()
 export class User {
-  @PrimaryColumn()
-  id: string = uuidv4();
+  @PrimaryGeneratedColumn()
+  id!: number;
 
   @Column()
   name: string;

@@ -27,7 +27,7 @@ export class AuthorController {
   }
 
   static async update(req: Request, res: Response) {
-    const id = req.params.id;
+    const id = Number(req.params.id);
     const { name } = req.body;
 
     const author = await repo().findOneBy({ id });
@@ -44,7 +44,7 @@ export class AuthorController {
   }
 
   static async delete(req: Request, res: Response) {
-    const id = req.params.id;
+    const id = Number(req.params.id);
     const author = await repo().findOneBy({ id });
     if (!author) return res.status(404).send("Author not found");
 
@@ -58,7 +58,7 @@ export class AuthorController {
   }
 
   static async getById(req: Request, res: Response) {
-    const id = req.params.id;
+    const id = Number(req.params.id);
     const author = await repo().findOneBy({ id });
     if (!author) return res.status(404).send("Author not found");
 

@@ -26,7 +26,7 @@ export class UserController {
   }
 
   static async update(req: Request, res: Response) {
-    const id = req.params.id;
+    const id = Number(req.params.id);
     const { name, email } = req.body;
 
     const user = await repo().findOneBy({ id });
@@ -44,13 +44,13 @@ export class UserController {
   }
 
   static async delete(req: Request, res: Response) {
-    const id = req.params.id;
+    const id = Number(req.params.id);
     const user = await repo().findOneBy({ id });
     if (!user) return res.status(404).send("User not found");
 
     try {
       await repo().delete(id);
-      res.status(204).send("User deleted");
+      res.status(200).send("User deleted");
     } catch (error) {
       console.log(error);
       res.status(500).send("Error deleting user");
@@ -58,7 +58,7 @@ export class UserController {
   }
 
   static async getById(req: Request, res: Response) {
-    const id = req.params.id;
+    const id = Number(req.params.id);
     const user = await repo().findOneBy({ id });
     if (!user) return res.status(404).send("User not found");
 

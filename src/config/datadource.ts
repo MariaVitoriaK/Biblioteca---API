@@ -12,13 +12,13 @@ import { Reservation } from "src/entities/Reservation";
 dotenv.config();
 
 export const AppDataSource = new DataSource({
-  type: "oracle",
-  host: process.env.DB_HOST,
-  port: Number(process.env.DB_PORT) || 1521,
-  username: process.env.DB_USERNAME,
-  password: process.env.DB_PASSWORD,
-  sid: process.env.DB_SID, // ou serviceName, se preferir
-  synchronize: true, // só para desenvolvimento
+  type: "mysql",
+  host: process.env.DB_HOST || "localhost",
+  port: Number(process.env.DB_PORT) || 3306,
+  username: process.env.DB_USERNAME || "root",
+  password: process.env.DB_PASSWORD || "",
+  database: process.env.DB_NAME || "library",
+  synchronize: true, 
   logging: false,
   entities: [User, Author, Genre, Book, Reservation],
 });

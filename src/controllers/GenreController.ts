@@ -25,7 +25,7 @@ export class GenreController {
   }
 
   static async update(req: Request, res: Response) {
-    const id = req.params.id;
+    const id = Number(req.params.id);
     const { name } = req.body;
 
     const genre = await repo().findOneBy({ id });
@@ -42,7 +42,7 @@ export class GenreController {
   }
 
   static async delete(req: Request, res: Response) {
-    const id = req.params.id;
+    const id = Number(req.params.id);
     const genre = await repo().findOneBy({ id });
     if (!genre) return res.status(404).send("Genre not found");
 
@@ -56,7 +56,7 @@ export class GenreController {
   }
 
   static async getById(req: Request, res: Response) {
-    const id = req.params.id;
+    const id = Number(req.params.id);
     const genre = await repo().findOneBy({ id });
     if (!genre) return res.status(404).send("Genre not found");
 
