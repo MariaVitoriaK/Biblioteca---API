@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { BookController } from "src/controllers/BookController";
+import { authMiddleware } from "src/middlewares/auth";
 
 
 const router = Router();

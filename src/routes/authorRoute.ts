@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { AuthorController } from "src/controllers/AuthorController";
+import { authMiddleware } from "src/middlewares/auth";
 
 
 const router = Router();
