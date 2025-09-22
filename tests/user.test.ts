@@ -4,19 +4,17 @@ import app from "../src/app";
 import { Reservation } from "../src/entities/Reservation";
 import { User } from "../src/entities/User";
 
+
 beforeAll(async () => {
   await AppDataSource.initialize();
 });
 
 beforeEach(async () => {
-  // desabilita verificações de FK
   await AppDataSource.query("SET FOREIGN_KEY_CHECKS = 0;");
 
-  // limpa as tabelas na ordem correta
   await AppDataSource.getRepository(Reservation).clear();
   await AppDataSource.getRepository(User).clear();
 
-  // habilita novamente FK
   await AppDataSource.query("SET FOREIGN_KEY_CHECKS = 1;");
 });
 

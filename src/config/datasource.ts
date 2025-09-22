@@ -1,4 +1,3 @@
-// src/config/data-source.ts
 import "reflect-metadata";
 import { DataSource } from "typeorm";
 import dotenv from "dotenv";
@@ -18,7 +17,6 @@ export const AppDataSource = new DataSource({
   username: process.env.DB_USERNAME || "root",
   password: process.env.DB_PASSWORD || "",
   database: process.env.NODE_ENV === "test" ? "biblioteca_teste" : "biblioteca",
-  //database: process.env.DB_NAME || "library",
   synchronize: true, 
   logging: false,
   entities: [User, Author, Genre, Book, Reservation],

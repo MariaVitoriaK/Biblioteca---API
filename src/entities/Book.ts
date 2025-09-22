@@ -1,8 +1,7 @@
-// src/Entities/Book.ts
 import { Entity, PrimaryColumn, Column, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Author } from "./Author";
 import { Genre } from "./Genre";
-import { v4 as uuidv4 } from "uuid";
+
 
 @Entity()
 export class Book {

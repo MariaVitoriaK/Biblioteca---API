@@ -1,4 +1,3 @@
-// src/controllers/UserController.ts
 import { Request, Response } from "express";
 import { AppDataSource } from "src/config/datasource";
 import { User } from "src/entities/User";
@@ -18,10 +17,10 @@ export class UserController {
     try {
       const user = repo().create({ name, email, password });
       await repo().save(user);
-      res.status(201).send("Usuário criado!");
+      res.status(201).send("Usuário criado com sucesso");
     } catch (error) {
       console.log(error);
-      res.status(500).send("Erro na criação do usuário");
+      res.status(500).send("Erro ao criar usuário");
     }
   }
 
@@ -36,31 +35,31 @@ export class UserController {
       if (name) user.name = name;
       if (email) user.email = email;
       await repo().save(user);
-      res.status(200).send("User updated");
+      res.status(200).send("Usuário atualizado com sucesso");
     } catch (error) {
       console.log(error);
-      res.status(500).send("Error updating user");
+      res.status(500).send("Erro ao atualizar usuário");
     }
   }
 
   static async delete(req: Request, res: Response) {
     const id = Number(req.params.id);
     const user = await repo().findOneBy({ id });
-    if (!user) return res.status(404).send("User not found");
+    if (!user) return res.status(404).send("Usuário não encontrado");
 
     try {
       await repo().delete(id);
-      res.status(200).send("User deleted");
+      res.status(200).send("Usuário deletado com sucesso");
     } catch (error) {
       console.log(error);
-      res.status(500).send("Error deleting user");
+      res.status(500).send("Erro ao deletar usuário");
     }
   }
 
   static async getById(req: Request, res: Response) {
     const id = Number(req.params.id);
     const user = await repo().findOneBy({ id });
-    if (!user) return res.status(404).send("User not found");
+    if (!user) return res.status(404).send("Usuário não encontrado");
 
     res.status(200).json(user);
   }

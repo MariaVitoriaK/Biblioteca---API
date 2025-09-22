@@ -1,6 +1,4 @@
-// src/app.ts
 import express, { Router } from "express";
-import cors from "cors";
 import userRoutes from "./userRoute";
 import authorRoutes from "./authorRoute";
 import genreRoutes from "./genreRoute";
@@ -10,7 +8,6 @@ import authRoutes from "./authRoute";
 
 
 const router = Router()
-
 
 router.use("/users", userRoutes);
 router.use("/authors", authorRoutes);

@@ -1,10 +1,8 @@
-// src/controllers/ReservationController.ts
 import { Request, Response } from "express";
 import { AppDataSource } from "src/config/datasource";
 import { Book } from "src/entities/Book";
 import { Reservation } from "src/entities/Reservation";
 import { User } from "src/entities/User";
-
 
 
 const repo = () => AppDataSource.getRepository(Reservation);
@@ -23,29 +21,29 @@ export class ReservationController {
     const user = await userRepo().findOneBy({ id: userId });
     const book = await bookRepo().findOneBy({ id: bookId });
 
-    if (!user || !book) return res.status(400).send("User or book not found");
+    if (!user || !book) return res.status(400).send("Usuário ou Livro não encontrado");
 
     try {
       const reservation = repo().create({ user, book });
       await repo().save(reservation);
-      res.status(201).send("Reservation created!");
+      res.status(201).send("Reserva criada com sucesso");
     } catch (error) {
       console.log(error);
-      res.status(500).send("Error creating reservation");
+      res.status(500).send("Erro ao criar reserva");
     }
   }
 
   static async delete(req: Request, res: Response) {
     const id = Number(req.params.id);
     const reservation = await repo().findOneBy({ id });
-    if (!reservation) return res.status(404).send("Reservation not found");
+    if (!reservation) return res.status(404).send("Reserva não encontrada");
 
     try {
       await repo().delete(id);
-      res.status(200).send("Reservation deleted");
+      res.status(200).send("Reserva deletada com sucesso");
     } catch (error) {
       console.log(error);
-      res.status(500).send("Error deleting reservation");
+      res.status(500).send("Erro ao deletar reserva");
     }
   }
 }

@@ -1,8 +1,6 @@
-// src/controllers/AuthorController.ts
 import { Request, Response } from "express";
 import { AppDataSource } from "src/config/datasource";
 import { Author } from "src/entities/Author";
-
 
 
 const repo = () => AppDataSource.getRepository(Author);
@@ -19,10 +17,10 @@ export class AuthorController {
     try {
       const author = repo().create({ name });
       await repo().save(author);
-      res.status(201).send("Author created!");
+      res.status(201).send("Autor criado com sucesso");
     } catch (error) {
       console.log(error);
-      res.status(500).send("Error creating author");
+      res.status(500).send("Erro ao criar autor");
     }
   }
 
@@ -31,36 +29,36 @@ export class AuthorController {
     const { name } = req.body;
 
     const author = await repo().findOneBy({ id });
-    if (!author) return res.status(404).send("Author not found");
+    if (!author) return res.status(404).send("Autor não encontrado");
 
     try {
       if (name) author.name = name;
       await repo().save(author);
-      res.status(200).send("Author updated");
+      res.status(200).send("Autor atualizado com sucesso");
     } catch (error) {
       console.log(error);
-      res.status(500).send("Error updating author");
+      res.status(500).send("Erro ao atualizar autor");
     }
   }
 
   static async delete(req: Request, res: Response) {
     const id = Number(req.params.id);
     const author = await repo().findOneBy({ id });
-    if (!author) return res.status(404).send("Author not found");
+    if (!author) return res.status(404).send("Autor não encontrado");
 
     try {
       await repo().delete(id);
-      res.status(200).send("Author deleted");
+      res.status(200).send("Autor deletado com sucesso");
     } catch (error) {
       console.log(error);
-      res.status(500).send("Error deleting author");
+      res.status(500).send("Erro ao deletar autor");
     }
   }
 
   static async getById(req: Request, res: Response) {
     const id = Number(req.params.id);
     const author = await repo().findOneBy({ id });
-    if (!author) return res.status(404).send("Author not found");
+    if (!author) return res.status(404).send("Autor não encontrado");
 
     res.status(200).json(author);
   }

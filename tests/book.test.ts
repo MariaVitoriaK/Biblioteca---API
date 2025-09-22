@@ -8,6 +8,7 @@ import jwt from "jsonwebtoken";
 import { Author } from "../src/entities/Author";
 import { Genre } from "../src/entities/Genre";
 
+
 let token: string;
 
 beforeAll(async () => {
@@ -19,7 +20,7 @@ beforeAll(async () => {
     email: "tester@test.com",
     password: "123456",
   });
-  // dentro do beforeAll ou dentro do it antes de criar o livro
+  
   const authorRepo = AppDataSource.getRepository(Author);
   const genreRepo = AppDataSource.getRepository(Genre);
 
@@ -38,14 +39,11 @@ beforeAll(async () => {
 });
 
 beforeEach(async () => {
-  // desabilita verificações de FK
   await AppDataSource.query("SET FOREIGN_KEY_CHECKS = 0;");
 
-  // limpa as tabelas na ordem correta
   await AppDataSource.getRepository(Reservation).clear();
   await AppDataSource.getRepository(Book).clear();
 
-  // habilita novamente FK
   await AppDataSource.query("SET FOREIGN_KEY_CHECKS = 1;");
 });
 

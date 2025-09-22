@@ -2,6 +2,7 @@ import { Router } from "express";
 import { GenreController } from "src/controllers/GenreController";
 import { authMiddleware } from "../middlewares/auth";
 
+
 const router = Router();
 
 router.get("/", GenreController.getAll);
