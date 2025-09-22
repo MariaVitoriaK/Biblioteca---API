@@ -1,6 +1,6 @@
 // src/controllers/BookController.ts
 import { Request, Response } from "express";
-import { AppDataSource } from "src/config/datadource";
+import { AppDataSource } from "src/config/datasource";
 import { Author } from "src/entities/Author";
 import { Book } from "src/entities/Book";
 import { Genre } from "src/entities/Genre";

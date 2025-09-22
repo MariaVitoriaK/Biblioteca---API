@@ -1,6 +1,6 @@
 // src/controllers/AuthorController.ts
 import { Request, Response } from "express";
-import { AppDataSource } from "src/config/datadource";
+import { AppDataSource } from "src/config/datasource";
 import { Author } from "src/entities/Author";
 
 

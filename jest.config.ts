@@ -5,6 +5,9 @@ const config: Config = {
   testEnvironment: "node",
   moduleFileExtensions: ["ts", "js", "json"],
   roots: ["<rootDir>/tests"],
+  moduleNameMapper: {
+    "^src/(.*)$": "<rootDir>/src/$1"
+  }
 };
 
 export default config;
