@@ -48,7 +48,7 @@ export class GenreController {
 
     try {
       await repo().delete(id);
-      res.status(204).send("Genre deleted");
+      res.status(200).send("Genre deleted");
     } catch (error) {
       console.log(error);
       res.status(500).send("Error deleting genre");

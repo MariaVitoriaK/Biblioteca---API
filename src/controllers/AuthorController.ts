@@ -50,7 +50,7 @@ export class AuthorController {
 
     try {
       await repo().delete(id);
-      res.status(204).send("Author deleted");
+      res.status(200).send("Author deleted");
     } catch (error) {
       console.log(error);
       res.status(500).send("Error deleting author");

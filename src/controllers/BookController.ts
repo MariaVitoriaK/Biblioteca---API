@@ -62,7 +62,7 @@ export class BookController {
 
     try {
       await repo().delete(id);
-      res.status(204).send("Book deleted");
+      res.status(200).send("Book deleted");
     } catch (error) {
       console.log(error);
       res.status(500).send("Error deleting book");

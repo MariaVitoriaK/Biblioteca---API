@@ -42,7 +42,7 @@ export class ReservationController {
 
     try {
       await repo().delete(id);
-      res.status(204).send("Reservation deleted");
+      res.status(200).send("Reservation deleted");
     } catch (error) {
       console.log(error);
       res.status(500).send("Error deleting reservation");
