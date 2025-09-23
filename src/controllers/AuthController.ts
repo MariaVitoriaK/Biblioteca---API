@@ -14,53 +14,52 @@ export class AuthController {
   static async register(req: Request, res: Response) {
     const { name, email, password } = req.body;
     if (!email || !password || !name) {
-      return res.status(400).send("Algums campos estão faltando");
+      return res.status(400).json({ message: "Alguns campos estão faltando" });
     }
 
     try {
       const existing = await repo().findOneBy({ email });
       if (existing) {
-        return res.status(400).send("Email já está em uso");
+        return res.status(400).json({ message: "Email já está em uso" });
       }
 
       const hashed = await bcrypt.hash(password, 10);
       const user = repo().create({ name, email, password: hashed });
       await repo().save(user);
 
-      return res.status(201).send("Usuário criado com sucesso");
+      return res.status(201).json({ message: "Usuário criado com sucesso" });
     } catch (error) {
       console.error(error);
-      return res.status(500).send("Erro ao criar usuário");
+      return res.status(500).json({ message: "Erro ao criar usuário" });
     }
   }
 
   static async login(req: Request, res: Response) {
     const { email, password } = req.body;
     if (!email || !password) {
-      return res.status(400).send("Alguns campos estão faltando");
+      return res.status(400).json({ message: "Alguns campos estão faltando" });
     }
 
     try {
       const user = await repo().findOneBy({ email });
       if (!user) {
-        return res.status(401).send("Credenciais inválidas");
+        return res.status(401).json({ message: "Credenciais inválidas" });
       }
 
       const match = await bcrypt.compare(password, user.password);
       if (!match) {
-        return res.status(401).send("Credenciais inválidas");
+        return res.status(401).json({ message: "Credenciais inválidas" });
       }
 
       const secret: Secret = process.env.JWT_SECRET || "default_secret";
-
       const expiresIn = (process.env.JWT_EXPIRES_IN || "1h") as SignOptions["expiresIn"];
 
       const token = jwt.sign({ id: user.id }, secret, { expiresIn });
 
-      return res.status(200).json({ token });
+      return res.status(200).json({ message: "Login bem-sucedido", token });
     } catch (error) {
       console.error(error);
-      return res.status(500).send("Erro ao fazer login");
+      return res.status(500).json({ message: "Erro ao fazer login" });
     }
   }
 }
